@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html ng-app="sopracovoitApp">
+<html ng-app="sopracovoitApp" ng-controller="MainController">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Sopra Covoit</title>
 
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
 
 </head>
-<body>
+<body layout="row" layout-fill>
 
-    <div ng-view></div>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-sm')">
+        <md-toolbar layouy="column">
+            <h1 class="md-toolbar-tools" flex layout="column">
+                <a href="#/stats">
+                    <div flex>Sopra Covoit</div>
+                </a>
+            </h1>
+        </md-toolbar>
+
+        <md-content flex class="md-padding">
+            <div ng-repeat="entry in menu" flex layout="row">
+                <a ng-href="#/{{ entry.url }}">{{ entry.nom }}</a>
+            </div>
+        </md-content>
+
+    </md-sidenav>
 
     <script src="bower_components/angularjs/angular.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
