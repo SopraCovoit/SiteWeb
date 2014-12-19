@@ -3,10 +3,13 @@
 var sopracovoitControllers = angular.module('sopracovoitControllers', []);
 
 sopracovoitControllers.controller('MainController', ["$scope", function($scope){
+
     $scope.menu = [
         {"nom": "Users", "url": "users"},
         {"nom": "Stats", "url": "stats"}
     ];
+
+    $scope.loggedUser = null;
 
     $scope.section = $scope.menu[0].nom;
     $scope.toggleSection = function(name)
@@ -18,6 +21,13 @@ sopracovoitControllers.controller('MainController', ["$scope", function($scope){
     {
         return name == $scope.section;
     };
+
+    $scope.isLoggedUser = function()
+    {
+        console.log("ici");
+        console.log($scope.loggedUser);
+        return $scope.loggedUser != null;
+    }
 
 }]);
 

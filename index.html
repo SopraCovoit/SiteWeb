@@ -19,13 +19,28 @@
             </h1>
         </md-toolbar>
 
-        <md-content flex class="md-padding">
-            <div ng-repeat="entry in menu" flex layout="row">
+        <md-content flex class="md-padding" ng-show="isLoggedUser()">
+            <div ng-repeat="entry in menuConnected" flex layout="row">
                 <a ng-href="#/{{ entry.url }}">{{ entry.nom }}</a>
             </div>
         </md-content>
 
+        <md-content flex class="md-padding" ng-show="!isLoggedUser()">
+            <p>Administration</p>
+        </md-content>
+
     </md-sidenav>
+
+    <div layout="column" layout-fill>
+        <md-toolbar layout="column">
+            <h1 class="md-toolbar-tools" flex layout="column">
+                <div flex>Bloubi</div>
+            </h1>
+        </md-toolbar>
+
+        <md-content ng-view md-scroll-y flex class="md-padding"></md-content>
+
+    </div>
 
     <script src="bower_components/angularjs/angular.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
