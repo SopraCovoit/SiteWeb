@@ -1,3 +1,11 @@
 
-<h1>{{bloub}}</h1>
-<a href="#/stats">sqdqsd</a>
+<div layout-align="center center" layout>
+    <md-whiteframe class="md-whiteframe-z1" layout>
+        <form name="loginForm" style="padding: 20px;">
+            <md-text-float label="Email" ng-model="user.email" required></md-text-float>
+            <md-text-float type="password" label="Mot de passe" ng-model="user.password" required></md-text-float>
+            <md-checkbox ng-model="user.remember">Se souvenir de moi</md-checkbox>
+            <md-button class="md-primary md-raised" ng-click="submit(user)">Login</md-button>
+        </form>
+    </md-whiteframe>
+</div>

@@ -7,6 +7,9 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
     'sopracovoitControllers'
 ]);
 
+/*
+ * Routes
+ */
 sopracovoitApp.config(['$routeProvider', function($routeProvider){
     $routeProvider.
         when('/login', {
@@ -24,12 +27,14 @@ sopracovoitApp.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
+/*
+ * Register function to connection
+ */
 sopracovoitApp.run(function($rootScope, $location){
    $rootScope.$on('$routeChangeStart', function(event, next, current){
-      if($rootScope.loggedUser == null && next.originalPath != "/login")
+      if($rootScope.loggedUser.connected == false && next.originalPath != "/login")
       {
           $location.path('/login');
-          console.log("Redirect route not allowed");
       }
    });
 });
