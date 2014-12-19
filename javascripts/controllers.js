@@ -2,14 +2,20 @@
 
 var sopracovoitControllers = angular.module('sopracovoitControllers', []);
 
-sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", function($scope, $rootScope){
+sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", function($scope, $rootScope, $cookieStore){
 
     $scope.menu = [
         {"nom": "Users", "url": "users"},
         {"nom": "Stats", "url": "stats"}
     ];
 
-    $rootScope.loggedUser = {"connected": false};
+    if($cookieStore.get("loggedUser") != undefined)
+    {
+        // TODO check token
+        $rootScope.loggedUser = $cookieStore.get("loggedUser");
+    } else {
+        $rootScope.loggedUser = {"connected": false};
+    }
 
     $scope.section = $scope.menu[0].nom;
     $scope.toggleSection = function(name)
@@ -32,7 +38,8 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", fun
 sopracovoitControllers.controller('LoginCtrl', ["$scope",
     "$rootScope",
     "$location",
-    "$mdToast", function($scope, $rootScope, $location, $mdToast){
+    "$mdToast",
+    "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
 
     $scope.submit = function(user)
     {
@@ -53,6 +60,11 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
                 "email" : user.email,
                 "connected": true
             };
+
+            if(user.remember)
+            {
+                $cookieStore.put("loggedUser", $rootScope.loggedUser);
+            }
 
             $mdToast.show(
                 $mdToast.simple()
