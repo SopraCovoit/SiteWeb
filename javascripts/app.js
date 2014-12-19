@@ -12,20 +12,24 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
  * Routes
  */
 sopracovoitApp.config(['$routeProvider', function($routeProvider){
-    $routeProvider.
-        when('/login', {
-            templateUrl: 'partials/login.html',
-            controller: 'LoginCtrl'
-        });
+    $routeProvider.when('/login', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginCtrl'
+    });
+
+    $routeProvider.when('/logout', {
+        templateUrl: 'partials/login.html',
+        controller: 'LogoutCtrl'
+    });
 
     $routeProvider.when('/stats', {
-           templateUrl: 'partials/stats.html',
-            controller:'StatsCtrl'
-        });
+        templateUrl: 'partials/stats.html',
+        controller:'StatsCtrl'
+    });
 
     $routeProvider.otherwise({
-            redirectTo: '/stats'
-        });
+        redirectTo: '/stats'
+    });
 }]);
 
 /*

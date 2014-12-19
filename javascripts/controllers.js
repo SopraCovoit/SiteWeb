@@ -40,6 +40,27 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
 
 }]);
 
+sopracovoitControllers.controller('LogoutCtrl', ["$scope",
+    "$rootScope",
+    "$location",
+    "$mdToast",
+    "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
+
+        console.log("there");
+
+        $rootScope.loggedUser = {"connected": false};
+        $cookieStore.put("loggedUser", $rootScope.loggedUser);
+        $mdToast.show(
+            $mdToast.simple()
+                .content("Aurevoir !")
+                .position("top right")
+                .hideDelay(3000)
+        );
+
+        $location.path("/");
+
+}]);
+
 sopracovoitControllers.controller('LoginCtrl', ["$scope",
     "$rootScope",
     "$location",
