@@ -30,7 +30,12 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
 
     $scope.isLoggedUser = function()
     {
-        return $scope.loggedUser != null;
+        return $rootScope.loggedUser.connected == true;
+    }
+
+    $scope.setPage = function(name)
+    {
+        $scope.page = name;
     }
 
 }]);
@@ -40,6 +45,8 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
     "$location",
     "$mdToast",
     "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
+
+    $scope.$parent.setPage("Login");
 
     $scope.submit = function(user)
     {
@@ -87,5 +94,5 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
 }]);
 
 sopracovoitControllers.controller("StatsCtrl", ["$scope", function($scope){
-
+    $scope.$parent.setPage("Stats");
 }]);
