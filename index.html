@@ -20,11 +20,21 @@
         </md-toolbar>
 
         <md-content flex class="md-padding" ng-show="isLoggedUser()">
+            <md-list>
+                <md-item ng-repeat="entry in menu">
+                    <md-item-content>
+                    <a ng-href="#/{{ entry.url }}">
+                    <div flex>{{ entry.nom }}</div>
+                </a>
+                    </md-item-content>
+                </md-item>
+            </md-list>
             <div ng-repeat="entry in menu" flex layout="row">
-                <a ng-href="#/{{ entry.url }}">{{ entry.nom }}</a>
+                
             </div>
 
             <md-divider></md-divider>
+            <br/>
             <md-button ng-href="#/logout" class="md-raised md-warn">Deconnexion</md-button>
 
         </md-content>
@@ -36,7 +46,10 @@
     </md-sidenav>
 
     <div layout="column" layout-fill>
-        <md-toolbar layout="column">
+
+        <md-toolbar layout="row">
+
+            <md-button ng-click="openMenu()" hide-gt-sm>Menu</md-button>
             <h1 class="md-toolbar-tools" flex layout="column">
                 <div flex>{{ page }}</div>
             </h1>

@@ -2,7 +2,8 @@
 
 var sopracovoitControllers = angular.module('sopracovoitControllers', []);
 
-sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", function($scope, $rootScope, $cookieStore){
+sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", "$mdSidenav",
+    function($scope, $rootScope, $cookieStore, $mdSidenav){
 
     $scope.menu = [
         {"nom": "Users", "url": "users"},
@@ -31,12 +32,17 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
     $scope.isLoggedUser = function()
     {
         return $rootScope.loggedUser.connected == true;
-    }
+    };
+
+    $scope.openMenu = function()
+    {
+        $mdSidenav('left').toggle();
+    };
 
     $scope.setPage = function(name)
     {
         $scope.page = name;
-    }
+    };
 
 }]);
 
