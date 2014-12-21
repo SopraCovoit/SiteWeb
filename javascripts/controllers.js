@@ -42,6 +42,7 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
     $scope.setPage = function(name)
     {
         $scope.page = name;
+        $mdSidenav('left').close();
     };
 
 }]);
