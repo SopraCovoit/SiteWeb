@@ -27,8 +27,13 @@ sopracovoitApp.config(['$routeProvider', function($routeProvider){
         controller:'StatsCtrl'
     });
 
+    $routeProvider.when('/users', {
+        templateUrl: 'partials/users.html',
+        controller: 'UsersCtrl'
+    });
+
     $routeProvider.otherwise({
-        redirectTo: '/stats'
+        redirectTo: '/users'
     });
 }]);
 

@@ -123,3 +123,7 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
 sopracovoitControllers.controller("StatsCtrl", ["$scope", function($scope){
     $scope.$parent.setPage("Stats");
 }]);
+
+sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
+    $scope.$parent.setPage("Users");
+}]);
