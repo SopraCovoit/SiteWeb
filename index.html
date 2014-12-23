@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="sopracovoitApp" ng-controller="MainController">
+<html ng-app="sopracovoitApp" ng-controller="MainController" md-theme="red">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Sopra Covoit</title>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="bower_components/angular-material/themes/red-theme.css">
     <link href='css/fonts.css' rel='stylesheet' type='text/css'>
 
 </head>
@@ -39,11 +40,12 @@
     <div layout="column" layout-fill>
 
         <md-toolbar layout="row">
-
-            <md-button ng-click="openMenu()" hide-gt-sm>Menu</md-button>
-            <h1 class="md-toolbar-tools" flex layout="column">
-                <div flex>{{ page }}</div>
-            </h1>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="toggleMenu()" hide-gt-sm>Menu</md-button>
+                <h3>
+                    <span>{{ page }}</span>
+                </h3>
+            </div>
         </md-toolbar>
 
         <md-content ng-view md-scroll-y flex class="md-padding"></md-content>

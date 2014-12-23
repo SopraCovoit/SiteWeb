@@ -34,7 +34,7 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
         return $rootScope.loggedUser.connected == true;
     };
 
-    $scope.openMenu = function()
+    $scope.toggleMenu = function()
     {
         $mdSidenav('left').toggle();
     };
