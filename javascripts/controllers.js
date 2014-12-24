@@ -2,8 +2,8 @@
 
 var sopracovoitControllers = angular.module('sopracovoitControllers', []);
 
-sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", "$mdSidenav",
-    function($scope, $rootScope, $cookieStore, $mdSidenav){
+sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", "$mdSidenav", "$location",
+    function($scope, $rootScope, $cookieStore, $mdSidenav, $location){
 
     $scope.menu = [
         {"nom": "Users", "url": "users"},
@@ -18,17 +18,6 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
         $rootScope.loggedUser = {"connected": false};
     }
 
-    $scope.section = $scope.menu[0].nom;
-    $scope.toggleSection = function(name)
-    {
-        $scope.section = name;
-    };
-
-    $scope.isSelected = function(name)
-    {
-        return name == $scope.section;
-    };
-
     $scope.isLoggedUser = function()
     {
         return $rootScope.loggedUser.connected == true;
@@ -39,10 +28,21 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
         $mdSidenav('left').toggle();
     };
 
+    $scope.closeMenu = function()
+    {
+        $mdSidenav('left').close();
+    };
+
+    $scope.loadPage = function(page)
+    {
+        $location.path(page);
+        $scope.closeMenu();
+    };
+
     $scope.setPage = function(name)
     {
         $scope.page = name;
-        $mdSidenav('left').close();
+        $scope.closeMenu();
     };
 
 }]);
@@ -127,4 +127,61 @@ sopracovoitControllers.controller("StatsCtrl", ["$scope", function($scope){
 
 sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
     $scope.$parent.setPage("Users");
+
+    $scope.users = [
+        {
+            "nom": "Jérémie",
+            "prenom": "Boutoille",
+            "email": "jeremie@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Harry",
+            "prenom": "Cover",
+            "email": "harry@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        },
+        {
+            "nom": "Boubi",
+            "prenom": "Gna",
+            "email": "boubi@gmail.com",
+            "img": "./img/miaou.jpeg"
+        }];
+
 }]);

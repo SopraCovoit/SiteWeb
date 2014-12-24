@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #ececec;
+}
+
+header md-toolbar {
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+#login md-whiteframe {
+	background-color: white;
+}
+
+md-content#main.md-red-theme {
+    background-color: #ececec;
+}
+
+md-item-content {
+	background-color: white;
+}
+
+#mainFab {
+    position: fixed;
+    right: 2%;
+    bottom: 24px;
+}
+
+#fab-popup {
+    position: fixed;
+    right: 2%;
+    bottom: 90px;
+}
+
+.fab-item-list {
+	margin-top:10px;
+}
+
+.face {
+	border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 48px;
+    height: 48px;
+    margin: 8px;
+}

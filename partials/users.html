@@ -1,11 +1,45 @@
 
-<md-content layout="row" layout-fill style="padding:30px;">
-	<md-whiteframe class="md-whiteframe-z3" flex="60" layout>
-		blablabla
-    </md-whiteframe>
+<md-list>
+	<md-item ng-repeat="user in users">
+		<md-item-content>
+			<div class="md-tile-left">
+				<img ng-src="{{ user.img }}" class="face" alt="{{ user.nom }}">
+			</div>
+			<div class="md-tile-content">
+				<h3>{{ user.nom }} {{ user.prenom }}</h3>
+				<p>{{ user.email }}</p>
+			</div>
+		</md-item-content>
+		<md-divider md-inset ng-if="!$last"></md-divider>
+	</md-item>
+</md-list>
 
-    <md-whiteframe class="md-whiteframe-z1" flex layout>
-    	bloblboblo
-    </md-whiteframe>
-
+<!-- <md-content layout="row" layout-fill>
+	<md-whiteframe class="md-whiteframe-z3" flex="60" layout>boubi</md-whiteframe>
 </md-content>
+ -->
+<!--  <md-list layout-align="center" layout-fill>
+ 	<md-item flex>a</md-item>
+ 	<md-item flex>b</md-item>
+ </md-list> -->
+
+<div id="fab-popup" layout="column" layout-align="space-around" ng-show="showButtons">
+	
+	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
+		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+	</md-button>
+
+	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
+		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+	</md-button>
+
+	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
+		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+	</md-button>
+
+</div>
+
+<md-button class="md-fab md-primary" id="mainFab" aria-label="main fab" ng-init="showButtons = false" ng-click="showButtons = !showButtons">
+	<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+</md-button>
+</div>
