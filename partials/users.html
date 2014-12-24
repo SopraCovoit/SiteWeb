@@ -1,6 +1,8 @@
 
+<!-- <md-text-float label="search" ng-model="searchText"></md-text-float>
+ -->
 <md-list>
-	<md-item ng-repeat="user in users">
+	<md-item ng-repeat="user in users | filter:searchText">
 		<md-item-content>
 			<div class="md-tile-left">
 				<img ng-src="{{ user.img }}" class="face" alt="{{ user.nom }}">

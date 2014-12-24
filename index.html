@@ -53,7 +53,12 @@
 
         </md-sidenav>
 
-        <md-content ng-view flex class="md-padding" id="main"></md-content>
+        <md-content ng-view flex class="md-padding" id="main" ng-show="!isLoading()"></md-content>
+
+        <md-content ng-show="isLoading()" flex class="md-padding" layout="row" layout-align="center center">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>    
+        </md-content>
+
     </div>
 
     <script src="bower_components/angularjs/angular.min.js"></script>

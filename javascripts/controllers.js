@@ -10,6 +10,7 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
         {"nom": "Stats", "url": "stats"}
     ];
 
+
     if($cookieStore.get("loggedUser") != undefined)
     {
         // TODO check token
@@ -33,13 +34,18 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
         $mdSidenav('left').close();
     };
 
+    $scope.isLoading = function()
+    {
+        return $rootScope.isLoading;
+    };
+
     $scope.loadPage = function(page)
     {
         $location.path(page);
         $scope.closeMenu();
     };
 
-    $scope.setPage = function(name)
+    $scope.loadedPage = function(name)
     {
         $scope.page = name;
         $scope.closeMenu();
@@ -74,7 +80,7 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
     "$mdToast",
     "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
 
-    $scope.$parent.setPage("Login");
+    $scope.$parent.loadedPage("Login");
 
     $scope.submit = function(user)
     {
@@ -122,11 +128,11 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
 }]);
 
 sopracovoitControllers.controller("StatsCtrl", ["$scope", function($scope){
-    $scope.$parent.setPage("Stats");
+    $scope.$parent.loadedPage("Stats");
 }]);
 
 sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
-    $scope.$parent.setPage("Users");
+    $scope.$parent.loadedPage("Users");
 
     $scope.users = [
         {
@@ -178,8 +184,8 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
             "img": "./img/miaou.jpeg"
         },
         {
-            "nom": "Boubi",
-            "prenom": "Gna",
+            "nom": "Stéphanie",
+            "prenom": "De Monaco",
             "email": "boubi@gmail.com",
             "img": "./img/miaou.jpeg"
         }];

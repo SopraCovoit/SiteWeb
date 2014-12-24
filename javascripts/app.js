@@ -40,8 +40,11 @@ sopracovoitApp.config(['$routeProvider', function($routeProvider){
 /*
  * Register function to connection
  */
-sopracovoitApp.run(function($rootScope, $location, $mdToast){
+sopracovoitApp.run(function($rootScope, $location, $mdToast, $timeout){
+
    $rootScope.$on('$routeChangeStart', function(event, next, current){
+
+      $rootScope.isLoading = true;
       if($rootScope.loggedUser.connected == false && next.originalPath != "/login")
       {
           $location.path('/login');
@@ -59,4 +62,11 @@ sopracovoitApp.run(function($rootScope, $location, $mdToast){
        }
 
    });
+
+   $rootScope.$on('$routeChangeSuccess', function(event, next, current){
+      $timeout(function(){
+        $rootScope.isLoading = false;
+      }, 1000);
+   });
+
 });
