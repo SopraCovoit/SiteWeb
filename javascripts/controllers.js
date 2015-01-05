@@ -136,58 +136,32 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
 
     $scope.users = [
         {
-            "nom": "Jérémie",
-            "prenom": "Boutoille",
-            "email": "jeremie@gmail.com",
-            "img": "./img/miaou.jpeg"
+            "name": "Jérémie",
+            "surname": "Boutoille",
+            "mail": "jeremie@gmail.com",
+            "phone": "0616026915",
+            "isDriver": true,
+            "home": {
+                "lat": 1336,
+                "lng": 1338
+            },
+            "workplace": 1234,
+            "img": "./img/miaou.jpeg",
+            "expanded": true
         },
         {
-            "nom": "Harry",
-            "prenom": "Cover",
-            "email": "harry@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Boubi",
-            "prenom": "Gna",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
-        },
-        {
-            "nom": "Stéphanie",
-            "prenom": "De Monaco",
-            "email": "boubi@gmail.com",
-            "img": "./img/miaou.jpeg"
+            "name": "Jérémie",
+            "surname": "Boutoille",
+            "mail": "jeremie@gmail.com",
+            "phone": "0616026915",
+            "isDriver": true,
+            "home": {
+                "lat": 1336,
+                "lng": 1338
+            },
+            "workplace": 1234,
+            "img": "./img/miaou.jpeg",
+            "expanded": false
         }];
 
 }]);
