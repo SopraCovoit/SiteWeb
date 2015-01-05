@@ -5,13 +5,14 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
     'ngMaterial',
     'ngRoute',
     'ngCookies',
+    'uiGmapgoogle-maps',
     'sopracovoitControllers'
 ]);
 
 /*
  * Routes
  */
-sopracovoitApp.config(['$routeProvider', function($routeProvider){
+sopracovoitApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
     $routeProvider.when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginCtrl'
@@ -35,6 +36,12 @@ sopracovoitApp.config(['$routeProvider', function($routeProvider){
     $routeProvider.otherwise({
         redirectTo: '/users'
     });
+
+    uiGmapGoogleMapApiProvider.configure({
+        v: '3.17',
+        libraries: 'weather,geometry,visualization'
+    });
+
 }]);
 
 /*
