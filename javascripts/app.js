@@ -9,42 +9,65 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
     'sopracovoitControllers'
 ]);
 
+sopracovoitApp.constant("appConfig", {
+    routes : {
+        defaultRoute: '/stats',
+        login: {
+            name: 'Login',
+            path: '/login',
+            templateUrl: 'partials/login.html',
+            controller: 'LoginCtrl'
+        },
+        logout: {
+            name: 'Logout',
+            path: '/logout',
+            templateUrl: 'partials/login.html',
+            controller: "LogoutCtrl"
+        },
+        stats: {
+            name: 'Stats',
+            path: '/stats',
+            templateUrl: 'partials/stats.html',
+            controller: 'StatsCtrl'
+        },
+        users: {
+            name: 'Users',
+            path: '/users',
+            templateUrl: 'partials/users.html',
+            controller: 'UsersCtrl'
+        },
+        workplaces: {
+            name: 'Workplaces',
+            path: '/workplaces',
+            templateUrl: 'partials/workplaces.html',
+            controller: "WorkplacesCtrl"
+        },
+        paths: {
+            name: "Paths",
+            path: '/paths',
+            templateUrl: 'partials/paths.html',
+            controller: 'PathsCtrl'
+        }
+    }
+});
+
 /*
  * Routes
  */
-sopracovoitApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function($routeProvider, uiGmapGoogleMapApiProvider){
-    $routeProvider.when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'LoginCtrl'
-    });
+sopracovoitApp.config(['appConfig', '$routeProvider', 'uiGmapGoogleMapApiProvider', function(appConfig, $routeProvider, uiGmapGoogleMapApiProvider){
 
-    $routeProvider.when('/logout', {
-        templateUrl: 'partials/login.html',
-        controller: 'LogoutCtrl'
-    });
-
-    $routeProvider.when('/stats', {
-        templateUrl: 'partials/stats.html',
-        controller:'StatsCtrl'
-    });
-
-    $routeProvider.when('/users', {
-        templateUrl: 'partials/users.html',
-        controller: 'UsersCtrl'
-    });
-
-    $routeProvider.when('/workplaces', {
-        templateUrl: 'partials/workplaces.html',
-        controller: 'WorkplacesCtrl'
-    });
-
-    $routeProvider.when('/paths', {
-        templateUrl: 'partials/paths.html',
-        controller: 'PathsCtrl'
-    });
+    for(var i in appConfig.routes)
+    {
+        var route = appConfig.routes[i];
+        $routeProvider.when(route.path, {
+            templateUrl: route.templateUrl,
+            controller: route.controller
+        });
+        console.log(route);
+    }
 
     $routeProvider.otherwise({
-        redirectTo: '/users'
+        redirectTo: appConfig.routes.defaultRoute
     });
 
     uiGmapGoogleMapApiProvider.configure({

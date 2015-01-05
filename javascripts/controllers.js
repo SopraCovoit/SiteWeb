@@ -2,16 +2,15 @@
 
 var sopracovoitControllers = angular.module('sopracovoitControllers', []);
 
-sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$cookieStore", "$mdSidenav", "$location",
-    function($scope, $rootScope, $cookieStore, $mdSidenav, $location){
+sopracovoitControllers.controller('MainController', ["appConfig", "$scope", "$rootScope", "$cookieStore", "$mdSidenav", "$location",
+    function(appConfig, $scope, $rootScope, $cookieStore, $mdSidenav, $location){
 
     $scope.menu = [
-        {"nom": "Users", "url": "users"},
-        {"nom": "Stats", "url": "stats"},
-        {"nom": "Workplaces", "url": "workplaces"},
-        {"nom": "Paths", url:"paths"}
+        {"nom": appConfig.routes.users.name, "url": appConfig.routes.users.path},
+        {"nom": appConfig.routes.stats.name, "url": appConfig.routes.stats.path},
+        {"nom": appConfig.routes.workplaces.name, "url": appConfig.routes.workplaces.path},
+        {"nom": appConfig.routes.paths.name, url: appConfig.routes.paths.path}
     ];
-
 
     if($cookieStore.get("loggedUser") != undefined)
     {
@@ -61,7 +60,6 @@ sopracovoitControllers.controller('LogoutCtrl', ["$scope",
     "$mdToast",
     "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
 
-        console.log("there");
 
         $rootScope.loggedUser = {"connected": false};
         $cookieStore.put("loggedUser", $rootScope.loggedUser);
@@ -76,13 +74,13 @@ sopracovoitControllers.controller('LogoutCtrl', ["$scope",
 
 }]);
 
-sopracovoitControllers.controller('LoginCtrl', ["$scope",
+sopracovoitControllers.controller('LoginCtrl', ["appConfig", "$scope",
     "$rootScope",
     "$location",
     "$mdToast",
-    "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
+    "$cookieStore", function(appConfig, $scope, $rootScope, $location, $mdToast, $cookieStore){
 
-    $scope.$parent.loadedPage("Login");
+    $scope.$parent.loadedPage(appConfig.routes.login.name);
 
     $scope.submit = function(user)
     {
@@ -129,12 +127,12 @@ sopracovoitControllers.controller('LoginCtrl', ["$scope",
 
 }]);
 
-sopracovoitControllers.controller("StatsCtrl", ["$scope", function($scope){
-    $scope.$parent.loadedPage("Stats");
+sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+    $scope.$parent.loadedPage(appConfig.routes.stats.name);
 }]);
 
-sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
-    $scope.$parent.loadedPage("Users");
+sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+    $scope.$parent.loadedPage(appConfig.routes.users.name);
 
     $scope.users = [
         {
@@ -170,8 +168,8 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
 
 }]);
 
-sopracovoitControllers.controller("WorkplacesCtrl", ["$scope", function($scope){
-    $scope.$parent.loadedPage("Workplaces");
+sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+    $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.marker = {
         options: {draggable:true}
@@ -199,6 +197,6 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["$scope", function($scope){
 
 }]);
 
-sopracovoitControllers.controller("PathsCtrl", ["$scope", function($scope){
-    $scope.$parent.loadedPage("Paths");
+sopracovoitControllers.controller("PathsCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+    $scope.$parent.loadedPage(appConfig.routes.paths.name);
 }]);
