@@ -7,7 +7,8 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
 
     $scope.menu = [
         {"nom": "Users", "url": "users"},
-        {"nom": "Stats", "url": "stats"}
+        {"nom": "Stats", "url": "stats"},
+        {"nom": "Workplaces", "url": "workplaces"}
     ];
 
 
@@ -136,6 +137,7 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
 
     $scope.users = [
         {
+            id: 1,
             "name": "Jérémie",
             "surname": "Boutoille",
             "mail": "jeremie@gmail.com",
@@ -150,6 +152,7 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
             "expanded": true
         },
         {
+            id: 2,
             "name": "Jérémie",
             "surname": "Boutoille",
             "mail": "jeremie@gmail.com",
@@ -163,5 +166,34 @@ sopracovoitControllers.controller("UsersCtrl", ["$scope", function($scope){
             "img": "./img/miaou.jpeg",
             "expanded": false
         }];
+
+}]);
+
+sopracovoitControllers.controller("WorkplacesCtrl", ["$scope", function($scope){
+    $scope.$parent.loadedPage("Workplaces");
+
+    $scope.marker = {
+        options: {draggable:true}
+    };
+
+    $scope.workplaces = [
+        {
+            id: 1,
+            name: "Toulouse Sopra",
+            location: {
+                latitude: 45,
+                longitude: -73
+            },
+            expanded:true
+        },
+        {
+            id: 2,
+            name: "Bullshit Sopra",
+            location: {
+                latitude: 13.37,
+                longitude: 89.89
+            }
+        }
+    ];
 
 }]);

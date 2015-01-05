@@ -33,6 +33,11 @@ sopracovoitApp.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function(
         controller: 'UsersCtrl'
     });
 
+    $routeProvider.when('/workplaces', {
+        templateUrl: 'partials/workplaces.html',
+        controller: 'WorkplacesCtrl'
+    });
+
     $routeProvider.otherwise({
         redirectTo: '/users'
     });
