@@ -8,7 +8,8 @@ sopracovoitControllers.controller('MainController', ["$scope", "$rootScope", "$c
     $scope.menu = [
         {"nom": "Users", "url": "users"},
         {"nom": "Stats", "url": "stats"},
-        {"nom": "Workplaces", "url": "workplaces"}
+        {"nom": "Workplaces", "url": "workplaces"},
+        {"nom": "Paths", url:"paths"}
     ];
 
 
@@ -196,4 +197,8 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["$scope", function($scope){
         }
     ];
 
+}]);
+
+sopracovoitControllers.controller("PathsCtrl", ["$scope", function($scope){
+    $scope.$parent.loadedPage("Paths");
 }]);
