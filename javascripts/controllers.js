@@ -168,30 +168,12 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(
 
 }]);
 
-sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", function(appConfig, $scope, Workplace){
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.markerOptions = { draggable: true};
 
-    $scope.workplaces = [
-        {
-            id: 1,
-            name: "Toulouse Sopra",
-            location: {
-                latitude: 47.099,
-                longitude: 2.438
-            },
-            expanded:false
-        },
-        {
-            id: 2,
-            name: "Bullshit Sopra",
-            location: {
-                latitude: 40.1451,
-                longitude: -97.6680
-            }
-        }
-    ];
+    $scope.workplaces = Workplace.query();
 
 }]);
 

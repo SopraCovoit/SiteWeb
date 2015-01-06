@@ -11,6 +11,9 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
 ]);
 
 sopracovoitApp.constant("appConfig", {
+    api : {
+        base: "http://192.168.1.56:5000/api"
+    },
     routes : {
         defaultRoute: '/stats',
         login: {
