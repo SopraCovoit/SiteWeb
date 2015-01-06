@@ -148,7 +148,7 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(
             },
             "workplace": 1234,
             "img": "./img/miaou.jpeg",
-            "expanded": true
+            "expanded": false
         },
         {
             id: 2,
@@ -171,26 +171,24 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(
 sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", function(appConfig, $scope){
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
-    $scope.marker = {
-        options: {draggable:true}
-    };
+    $scope.markerOptions = { draggable: true};
 
     $scope.workplaces = [
         {
             id: 1,
             name: "Toulouse Sopra",
             location: {
-                latitude: 45,
-                longitude: -73
+                latitude: 47.099,
+                longitude: 2.438
             },
-            expanded:true
+            expanded:false
         },
         {
             id: 2,
             name: "Bullshit Sopra",
             location: {
-                latitude: 13.37,
-                longitude: 89.89
+                latitude: 40.1451,
+                longitude: -97.6680
             }
         }
     ];
