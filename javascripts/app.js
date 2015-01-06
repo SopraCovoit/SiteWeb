@@ -64,7 +64,6 @@ sopracovoitApp.config(['appConfig', '$routeProvider', 'uiGmapGoogleMapApiProvide
             templateUrl: route.templateUrl,
             controller: route.controller
         });
-        console.log(route);
     }
 
     $routeProvider.otherwise({
