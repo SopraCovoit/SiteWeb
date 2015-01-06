@@ -27,7 +27,7 @@
                         <h3 ng-click="workplace.tmp.expanded = !workplace.tmp.expanded">{{ workplace.name }}</h3>
                         <form name="workplaceform" style="padding:20px;">
                             <md-text-float label="Name" ng-model="workplace.name" required></md-text-float>
-                            <ui-gmap-google-map center="workplace.tmp.baseLocation" zoom="4" draggable="true">
+                            <ui-gmap-google-map center="workplace.tmp.baseLocation" zoom="8" draggable="true">
                                 <ui-gmap-marker coords="workplace.location" options="markerOptions" idkey="workplace.id">
                                 </ui-gmap-marker>
                             </ui-gmap-google-map>
