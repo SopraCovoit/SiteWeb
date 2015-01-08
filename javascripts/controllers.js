@@ -131,41 +131,11 @@ sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(
     $scope.$parent.loadedPage(appConfig.routes.stats.name);
 }]);
 
-sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", function(appConfig, $scope, User){
     $scope.$parent.loadedPage(appConfig.routes.users.name);
 
-    $scope.users = [
-        {
-            id: 1,
-            "name": "Jérémie",
-            "surname": "Boutoille",
-            "mail": "jeremie@gmail.com",
-            "phone": "0616026915",
-            "isDriver": true,
-            "home": {
-                "lat": 1336,
-                "lng": 1338
-            },
-            "workplace": 1234,
-            "img": "./img/miaou.jpeg",
-            "expanded": false
-        },
-        {
-            id: 2,
-            "name": "Jérémie",
-            "surname": "Boutoille",
-            "mail": "jeremie@gmail.com",
-            "phone": "0616026915",
-            "isDriver": true,
-            "home": {
-                "lat": 1336,
-                "lng": 1338
-            },
-            "workplace": 1234,
-            "img": "./img/miaou.jpeg",
-            "expanded": false
-        }];
-
+    $scope.users = User.query();
+    
 }]);
 
 sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", "$mdDialog",

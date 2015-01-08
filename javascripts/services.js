@@ -5,3 +5,7 @@ var sopracovoitServices = angular.module('sopracovoitServices', ['sopracovoitRes
 sopracovoitServices.factory('Workplace', ["appConfig", 'Resource', function(appConfig, $resource){
     return $resource(appConfig.api.base + "/workplace/:id", {id: "@id"});
 }]);
+
+sopracovoitServices.factory("User", ["appConfig", "Resource", function(appConfig, $resource){
+    return $resource(appConfig.api.base + "/user/:id", {id: "@id"});
+}]);
