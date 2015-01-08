@@ -172,8 +172,33 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     function(appConfig, $scope, Workplace, $mdToast, $mdDialog){
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
-    $scope.markerOptions = { draggable: true};
+    $scope.markerOptions = {draggable: true};
     $scope.workplaces = Workplace.query();
+
+    $scope.add = function()
+    {
+        $mdDialog.show({
+            title:"Add workplace",
+            controller: "WorkplaceAddCtrl",
+            templateUrl: "partials/workplace_add.html"
+        }).then(function(workplace){
+            workplace = new Workplace(workplace);
+            workplace.$save(function(data){ // success
+
+                data.tmp = {};
+                data.tmp.expanded = true;
+                $scope.workplaces = [data].concat($scope.workplaces);
+
+            }, function(err){ // error
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Unable to create workplace")
+                        .position("top right")
+                        .hideDelay(3000)
+                );
+            });
+        });
+    };
 
     $scope.save = function(workplace)
     {
@@ -230,6 +255,26 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
             );
         });
 
+    };
+
+}]);
+
+sopracovoitControllers.controller("WorkplaceAddCtrl", ["$scope", "$mdDialog", function($scope, $mdDialog){
+
+    $scope.markerOptions = { draggable: true};
+
+    $scope.workplace = {
+        location: {latitude:43.570900885989744, longitude:1.466313457965839},
+    };
+
+    $scope.cancel = function()
+    {
+        $mdDialog.cancel();
+    };
+
+    $scope.save = function()
+    {
+      $mdDialog.hide($scope.workplace);
     };
 
 }]);
