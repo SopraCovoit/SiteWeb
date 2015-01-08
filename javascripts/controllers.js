@@ -168,7 +168,8 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(
 
 }]);
 
-sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", function(appConfig, $scope, Workplace, $mdToast){
+sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", "$mdDialog",
+    function(appConfig, $scope, Workplace, $mdToast, $mdDialog){
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.markerOptions = { draggable: true};
@@ -188,6 +189,42 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
             $mdToast.show(
                 $mdToast.simple()
                     .content("Workplace not saved !!!!")
+                    .position("top right")
+                    .hideDelay(3000)
+            );
+        });
+
+    };
+
+    $scope.delete = function(workplace)
+    {
+        var confirm = $mdDialog.confirm()
+            .title("Are you sure?")
+            .content("This workplace will be lost ...")
+            .ariaLabel("Are you sure?")
+            .ok("Yes, delete")
+            .cancel("Cancel");
+        $mdDialog.show(confirm).then(function(){
+            workplace.$remove(function(data){
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Workplace deleted.")
+                        .position("top right")
+                        .hideDelay(3000)
+                );
+                $scope.workplaces = Workplace.query();
+            }, function(err){
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Workplace not deleted - internal error.")
+                        .position("top right")
+                        .hideDelay(3000)
+                );
+            });
+        }, function(){
+            $mdToast.show(
+                $mdToast.simple()
+                    .content("Action canceled")
                     .position("top right")
                     .hideDelay(3000)
             );
