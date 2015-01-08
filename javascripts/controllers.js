@@ -176,14 +176,23 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
 
     $scope.save = function(workplace)
     {
-        workplace.$save();
-        console.log("ici");
-        $mdToast.show(
-            $mdToast.simple()
-                .content("Workplace saved")
-                .position("bottom right")
-                .hideDelay(3000)
-        );
+        workplace.$save(function(data){ // success
+            $mdToast.show(
+                $mdToast.simple()
+                    .content("Workplace saved")
+                    .position("top right")
+                    .hideDelay(3000)
+            );
+            workplace.tmp.expanded = false;
+        }, function(err){ // error
+            $mdToast.show(
+                $mdToast.simple()
+                    .content("Workplace not saved !!!!")
+                    .position("top right")
+                    .hideDelay(3000)
+            );
+        });
+
     };
 
 }]);

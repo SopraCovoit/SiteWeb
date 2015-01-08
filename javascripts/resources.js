@@ -13,7 +13,7 @@ sopracovoitResource.factory('Resource', ['$resource', function($resource){
 
         var resource = $resource(url, params, methods);
 
-        resource.prototype.$save = function(){
+        resource.prototype.$save = function(success, error){
 
             var current = angular.copy(this);
 
@@ -23,9 +23,9 @@ sopracovoitResource.factory('Resource', ['$resource', function($resource){
             }
 
             if(!current.id) {
-                return current.$create();
+                return current.$create(success, error);
             } else {
-                return current.$update();
+                return current.$update(success, error);
             }
         };
 
