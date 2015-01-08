@@ -168,7 +168,7 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", function(
 
 }]);
 
-sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", function(appConfig, $scope, Workplace){
+sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", function(appConfig, $scope, Workplace, $mdToast){
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.markerOptions = { draggable: true};
@@ -177,6 +177,13 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     $scope.save = function(workplace)
     {
         workplace.$save();
+        console.log("ici");
+        $mdToast.show(
+            $mdToast.simple()
+                .content("Workplace saved")
+                .position("bottom right")
+                .hideDelay(3000)
+        );
     };
 
 }]);

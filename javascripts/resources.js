@@ -15,15 +15,17 @@ sopracovoitResource.factory('Resource', ['$resource', function($resource){
 
         resource.prototype.$save = function(){
 
-            if(this.tmp)
+            var current = angular.copy(this);
+
+            if(current.tmp)
             {
-                delete this.tmp;
+                delete current.tmp;
             }
 
-            if(!this.id) {
-                return this.$create();
+            if(!current.id) {
+                return current.$create();
             } else {
-                return this.$update();
+                return current.$update();
             }
         };
 
