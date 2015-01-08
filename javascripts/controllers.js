@@ -172,8 +172,12 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.markerOptions = { draggable: true};
-
     $scope.workplaces = Workplace.query();
+
+    $scope.save = function(workplace)
+    {
+        workplace.$save();
+    };
 
 }]);
 

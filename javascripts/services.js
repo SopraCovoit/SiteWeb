@@ -1,7 +1,7 @@
 'use strict';
 
-var sopracovoitServices = angular.module('sopracovoitServices', ['ngResource']);
+var sopracovoitServices = angular.module('sopracovoitServices', ['sopracovoitResource']);
 
-sopracovoitServices.factory('Workplace', ["appConfig", '$resource', function(appConfig, $resource){
-    return $resource(appConfig.api.base + "/workplace/:id",{},{});
+sopracovoitServices.factory('Workplace', ["appConfig", 'Resource', function(appConfig, $resource){
+    return $resource(appConfig.api.base + "/workplace/:id", {id: "@id"});
 }]);
