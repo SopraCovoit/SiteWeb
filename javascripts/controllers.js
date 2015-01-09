@@ -135,7 +135,27 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", f
     $scope.$parent.loadedPage(appConfig.routes.users.name);
 
     $scope.users = User.query();
-    
+
+    $scope.save = function(user)
+    {
+        user.$save(function(data){ // success
+            $mdToast.show(
+                $mdToast.simple()
+                    .content("User saved")
+                    .position("top right")
+                    .hideDelay(3000)
+            );
+            user.tmp.expanded = false;
+        }, function(err){ // error
+            $mdToast.show(
+                $mdToast.simple()
+                    .content("User not saved !!!!")
+                    .position("top right")
+                    .hideDelay(3000)
+            );
+        });
+    };
+
 }]);
 
 sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", "$mdDialog",

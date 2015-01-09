@@ -4,7 +4,7 @@
 
 	<div ng-repeat="user in users | filter:searchText">
 
-		<md-card ng-if="!user.expanded" ng-click="user.expanded = !user.expanded" ng-mouseover="hover = true" ng-mouseout="hover = false">
+		<md-card ng-if="!user.tmp.expanded" ng-click="user.tmp.expanded = !user.tmp.expanded">
 			<md-item>
 				<md-item-content>
 					<div class="md-tile-left">
@@ -18,14 +18,14 @@
 			</md-item>
 		</md-card>
 
-		<md-card ng-if="user.expanded" ng-mouseover="hover = true" ng-mouseout="hover = false">
+		<md-card ng-if="user.tmp.expanded">
 			<md-item>
 				<md-item-content>
 					<div class="md-tile-left">
 						<img ng-src="bower_components/material-design-icons/social/svg/design/ic_people_24px.svg" class="face" alt="{{ workplace.name }}">
 					</div>
 					<div class="md-tile-content">
-						<h3 ng-click="user.expanded = !user.expanded">{{ user.name }} {{user.surname}}</h3>
+						<h3 ng-click="user.tmp.expanded = !user.tmp.expanded">{{ user.name }} {{user.surname}}</h3>
 						<form name="userform" style="padding:20px;">
 							<div layout="row">
 								<md-text-float label="Name" ng-model="user.name" required></md-text-float>
@@ -40,6 +40,10 @@
 								<span ng-if="!user.isDriver">Is not driver</span>
 							</md-checkbox>
 							Workplace : <a ng-href="{{ user.workplace}}">{{ user.workplace }}</a>
+							<br/>
+							<br/>
+							<md-button class="md-raised" ng-click="save(user)">Save</md-button>
+							<md-button class="md-warn md-raised" ng-click="delete(user)">Delete</md-button>
 						</form>
 					</div>
 				</md-item-content>
