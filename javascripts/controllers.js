@@ -160,7 +160,7 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     $scope.save = function(workplace)
     {
         workplace.$save(function(data){ // success
-            Utils.toast("Workplace save");
+            Utils.toast("Workplace saved");
             workplace.tmp.expanded = false;
         }, function(err){ // error
             Utils.toast("Workplace not saved !!!");
@@ -170,22 +170,20 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
 
     $scope.delete = function(workplace)
     {
-        var confirm = $mdDialog.confirm()
-            .title("Are you sure?")
-            .content("This workplace will be lost ...")
-            .ariaLabel("Are you sure?")
-            .ok("Yes, delete")
-            .cancel("Cancel");
-        $mdDialog.show(confirm).then(function(){
-            workplace.$remove(function(data){
-                Utils.toast("Workplace deleted.");
-                $scope.workplaces = Workplace.query();
-            }, function(err){
-                Utils.toast("Workplace not deleted - internal error.");
-            });
-        }, function(){
-            Utils.toast("Action canceled");
-        });
+
+        Utils.dialogConfirm("This workplace will be lost ...",
+            function(){
+                workplace.$remove(function(data){
+                    Utils.toast("Workplace deleted.");
+                    $scope.workplaces = Workplace.query();
+                }, function(err){
+                    Utils.toast("Workplace not deleted - internal error.");
+                });
+            },
+            function(){
+                Utils.toast("Action canceled");
+            }
+        );
 
     };
 
