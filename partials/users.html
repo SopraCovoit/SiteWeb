@@ -39,8 +39,11 @@
 								<span ng-if="user.isDriver">Is driver</span>
 								<span ng-if="!user.isDriver">Is not driver</span>
 							</md-checkbox>
-							Workplace : <a ng-href="{{ user.workplace}}">{{ user.workplace }}</a>
-							<br/>
+							<md-radio-group layout="row" ng-model="user.workplace">
+								<md-radio-button ng-repeat="w in workplaces" ng-value="w.id" aria-label="w.name">
+									{{ w.name }}
+								</md-radio-button>
+							</md-radio-group>
 							<br/>
 							<md-button class="md-raised" ng-click="save(user)">Save</md-button>
 							<md-button class="md-warn md-raised" ng-click="delete(user)">Delete</md-button>

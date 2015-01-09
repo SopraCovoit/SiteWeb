@@ -111,10 +111,12 @@ sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(
     $scope.$parent.loadedPage(appConfig.routes.stats.name);
 }]);
 
-sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Utils", function(appConfig, $scope, User, Utils){
+sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Workplace", "Utils",
+    function(appConfig, $scope, User, Workplace, Utils){
     $scope.$parent.loadedPage(appConfig.routes.users.name);
 
     $scope.users = User.query();
+    $scope.workplaces = Workplace.query();
 
     $scope.save = function(user)
     {
@@ -124,6 +126,23 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "
         }, function(err){ // error
             Utils.toast("User not saved - internal error");
         });
+    };
+
+    $scope.delete = function(user)
+    {
+        Utils.dialogConfirm("This user will be lost ...",
+            function(){
+                user.$remove(function(data){
+                    Utils.toast("User deleted.");
+                    $scope.users = User.query();
+                }, function(err){
+                    Utils.toast("User not deleted - internal error.");
+                });
+            },
+            function(){
+                Utils.toast("Action canceled");
+            }
+        );
     };
 
 }]);
