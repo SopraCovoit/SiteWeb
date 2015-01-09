@@ -57,18 +57,13 @@ sopracovoitControllers.controller('MainController', ["appConfig", "$scope", "$ro
 sopracovoitControllers.controller('LogoutCtrl', ["$scope",
     "$rootScope",
     "$location",
-    "$mdToast",
-    "$cookieStore", function($scope, $rootScope, $location, $mdToast, $cookieStore){
+    "Utils",
+    "$cookieStore", function($scope, $rootScope, $location, Utils, $cookieStore){
 
 
         $rootScope.loggedUser = {"connected": false};
         $cookieStore.put("loggedUser", $rootScope.loggedUser);
-        $mdToast.show(
-            $mdToast.simple()
-                .content("Aurevoir !")
-                .position("top right")
-                .hideDelay(3000)
-        );
+        Utils.toast("Goodbye !")
 
         $location.path("/");
 
@@ -77,8 +72,8 @@ sopracovoitControllers.controller('LogoutCtrl', ["$scope",
 sopracovoitControllers.controller('LoginCtrl', ["appConfig", "$scope",
     "$rootScope",
     "$location",
-    "$mdToast",
-    "$cookieStore", function(appConfig, $scope, $rootScope, $location, $mdToast, $cookieStore){
+    "Utils",
+    "$cookieStore", function(appConfig, $scope, $rootScope, $location, Utils, $cookieStore){
 
     $scope.$parent.loadedPage(appConfig.routes.login.name);
 
@@ -86,12 +81,7 @@ sopracovoitControllers.controller('LoginCtrl', ["appConfig", "$scope",
     {
         if(user == undefined || user.email == undefined || user.password == undefined)
         {
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Merci de remplir tous les champs !")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Please fill all fields !");
             return;
         }
 
@@ -107,21 +97,11 @@ sopracovoitControllers.controller('LoginCtrl', ["appConfig", "$scope",
                 $cookieStore.put("loggedUser", $rootScope.loggedUser);
             }
 
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Bienvenue !")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Welcome !");
 
             $location.path("#/stats");
         } else {
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Mauvais utilisateur ou mot de passe !")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Bad user or password");
         }
     }
 
@@ -131,7 +111,7 @@ sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(
     $scope.$parent.loadedPage(appConfig.routes.stats.name);
 }]);
 
-sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", function(appConfig, $scope, User){
+sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Utils", function(appConfig, $scope, User, Utils){
     $scope.$parent.loadedPage(appConfig.routes.users.name);
 
     $scope.users = User.query();
@@ -139,27 +119,18 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", f
     $scope.save = function(user)
     {
         user.$save(function(data){ // success
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("User saved")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("User saved");
             user.tmp.expanded = false;
         }, function(err){ // error
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("User not saved !!!!")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("User not saved - internal error");
         });
     };
 
 }]);
 
-sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdToast", "$mdDialog",
-    function(appConfig, $scope, Workplace, $mdToast, $mdDialog){
+sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Workplace", "$mdDialog", "Utils",
+    function(appConfig, $scope, Workplace, $mdDialog, Utils){
+
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
 
     $scope.markerOptions = {draggable: true};
@@ -178,14 +149,10 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
                 data.tmp = {};
                 data.tmp.expanded = true;
                 $scope.workplaces = [data].concat($scope.workplaces);
+                Utils.toast("Workplace added");
 
             }, function(err){ // error
-                $mdToast.show(
-                    $mdToast.simple()
-                        .content("Unable to create workplace")
-                        .position("top right")
-                        .hideDelay(3000)
-                );
+                Utils.toast("Unable to create workplace");
             });
         });
     };
@@ -193,20 +160,10 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     $scope.save = function(workplace)
     {
         workplace.$save(function(data){ // success
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Workplace saved")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Workplace save");
             workplace.tmp.expanded = false;
         }, function(err){ // error
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Workplace not saved !!!!")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Workplace not saved !!!");
         });
 
     };
@@ -221,28 +178,13 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
             .cancel("Cancel");
         $mdDialog.show(confirm).then(function(){
             workplace.$remove(function(data){
-                $mdToast.show(
-                    $mdToast.simple()
-                        .content("Workplace deleted.")
-                        .position("top right")
-                        .hideDelay(3000)
-                );
+                Utils.toast("Workplace deleted.");
                 $scope.workplaces = Workplace.query();
             }, function(err){
-                $mdToast.show(
-                    $mdToast.simple()
-                        .content("Workplace not deleted - internal error.")
-                        .position("top right")
-                        .hideDelay(3000)
-                );
+                Utils.toast("Workplace not deleted - internal error.");
             });
         }, function(){
-            $mdToast.show(
-                $mdToast.simple()
-                    .content("Action canceled")
-                    .position("top right")
-                    .hideDelay(3000)
-            );
+            Utils.toast("Action canceled");
         });
 
     };

@@ -7,7 +7,8 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
     'ngCookies',
     'uiGmapgoogle-maps',
     'sopracovoitControllers',
-    'sopracovoitServices'
+    'sopracovoitServices',
+    'sopracovoitUtils'
 ]);
 
 sopracovoitApp.constant("appConfig", {
