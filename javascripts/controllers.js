@@ -6,8 +6,8 @@ sopracovoitControllers.controller('MainController', ["appConfig", "$scope", "$ro
     function(appConfig, $scope, $rootScope, $cookieStore, $mdSidenav, $location){
 
     $scope.menu = [
-        {"nom": appConfig.routes.users.name, "url": appConfig.routes.users.path},
         {"nom": appConfig.routes.stats.name, "url": appConfig.routes.stats.path},
+        {"nom": appConfig.routes.users.name, "url": appConfig.routes.users.path},
         {"nom": appConfig.routes.workplaces.name, "url": appConfig.routes.workplaces.path},
         {"nom": appConfig.routes.paths.name, url: appConfig.routes.paths.path}
     ];
