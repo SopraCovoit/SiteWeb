@@ -107,8 +107,12 @@ sopracovoitControllers.controller('LoginCtrl', ["appConfig", "$scope",
 
 }]);
 
-sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(appConfig, $scope){
+sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", "User", "Workplace", function(appConfig, $scope, User, Workplace){
     $scope.$parent.loadedPage(appConfig.routes.stats.name);
+
+    $scope.users = User.query();
+    $scope.workplaces = Workplace.query();
+
 }]);
 
 sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Workplace", "Utils", "$mdDialog",

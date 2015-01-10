@@ -14,6 +14,10 @@ header md-toolbar {
 	background-color: white;
 }
 
+md-whiteframe {
+    background-color:white;
+}
+
 md-card {
     background-color: white;
 }
