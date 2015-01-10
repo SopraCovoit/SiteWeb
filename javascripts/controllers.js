@@ -111,12 +111,32 @@ sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", function(
     $scope.$parent.loadedPage(appConfig.routes.stats.name);
 }]);
 
-sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Workplace", "Utils",
-    function(appConfig, $scope, User, Workplace, Utils){
+sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Workplace", "Utils", "$mdDialog",
+    function(appConfig, $scope, User, Workplace, Utils, $mdDialog){
     $scope.$parent.loadedPage(appConfig.routes.users.name);
 
     $scope.users = User.query();
     $scope.workplaces = Workplace.query();
+
+    $scope.add = function()
+    {
+        $mdDialog.show({
+            title:"Add user",
+            controller: "UserAddCtrl",
+            templateUrl: "partials/user_add.html"
+        }).then(function(user){
+            user = new User(user);
+            user.$save(function(data){ // success
+                data.tmp = {};
+                data.tmp.expanded = false;
+                $scope.users = [data].concat($scope.users);
+                Utils.toast("User added");
+
+            }, function(err){ // error
+                Utils.toast("Unable to create user");
+            });
+        });
+    }
 
     $scope.save = function(user)
     {
@@ -143,6 +163,22 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "
                 Utils.toast("Action canceled");
             }
         );
+    };
+
+}]);
+
+sopracovoitControllers.controller("UserAddCtrl", ["$scope", "$mdDialog", "Workplace", function($scope, $mdDialog, Workplace){
+
+    $scope.workplaces = Workplace.query();
+
+    $scope.cancel = function()
+    {
+        $mdDialog.cancel();
+    };
+
+    $scope.save = function()
+    {
+        $mdDialog.hide($scope.user);
     };
 
 }]);

@@ -1,0 +1,28 @@
+<md-dialog aria-label="User add" md-theme="red">
+    <md-content>
+        <form name="userform" style="padding:20px;">
+            <md-text-float label="Name" ng-model="user.name" required></md-text-float>
+            <md-text-float label="Surname" ng-model="user.surname" required></md-text-float>
+            <md-text-float label="Mail" ng-model="user.mail" required type="email"></md-text-float>
+            <md-text-float label="Phone" ng-model="user.phone" required></md-text-float>
+            <md-checkbox ng-model="user.isDriver" aria-label="Checkbox 1" required>
+                <span ng-if="user.isDriver">Is driver</span>
+                <span ng-if="!user.isDriver">Is not driver</span>
+            </md-checkbox>
+            <md-radio-group ng-model="user.workplace" required>
+                <md-radio-button ng-repeat="w in workplaces" ng-value="w.id" aria-label="w.name">
+                    {{ w.name }}
+                </md-radio-button>
+            </md-radio-group>
+        </form>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="cancel()">
+            Cancel
+        </md-button>
+        <md-button ng-click="save()" class="md-primary">
+            Save
+        </md-button>
+    </div>
+</md-dialog>
+

@@ -56,23 +56,8 @@
 	</div>
 </md-list>
 
-<div id="fab-popup" layout="column" layout-align="space-around" ng-show="showButtons">
-	
-	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
-		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
-	</md-button>
 
-	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
-		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
-	</md-button>
-
-	<md-button class="fab-item-list md-fab md-raised" aria-label="Add user">
-		<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
-	</md-button>
-
-</div>
-
-<md-button class="md-fab md-primary" id="mainFab" aria-label="main fab" ng-init="showButtons = false" ng-click="showButtons = !showButtons">
+<md-button class="md-fab md-primary" id="mainFab" aria-label="main fab" ng-click="add()">
 	<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
 </md-button>
 </div>
