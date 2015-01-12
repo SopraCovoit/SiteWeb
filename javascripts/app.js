@@ -13,7 +13,7 @@ var sopracovoitApp = angular.module('sopracovoitApp', [
 
 sopracovoitApp.constant("appConfig", {
     api : {
-        base: "./api"
+        base: "http://188.165.245.229:21780/Server_war/api"
     },
     routes : {
         defaultRoute: '/stats',
