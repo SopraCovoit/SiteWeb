@@ -217,26 +217,32 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
             templateUrl: "partials/workplace_add.html"
         }).then(function(workplace){
             workplace = new Workplace(workplace);
+            $scope.$parent.setLoading(true);
             workplace.$save(function(data){ // success
 
                 data.tmp = {};
                 data.tmp.expanded = true;
                 $scope.workplaces = [data].concat($scope.workplaces);
                 Utils.toast("Workplace added");
+                $scope.$parent.setLoading(false);
 
             }, function(err){ // error
                 Utils.toast("Unable to create workplace");
+                $scope.$parent.setLoading(false);
             });
         });
     };
 
     $scope.save = function(workplace)
     {
+        $scope.$parent.setLoading(true);
         workplace.$save(function(data){ // success
             Utils.toast("Workplace saved");
             workplace.tmp.expanded = false;
+            $scope.$parent.setLoading(false);
         }, function(err){ // error
             Utils.toast("Workplace not saved !!!");
+            $scope.$parent.setLoading(false);
         });
 
     };
@@ -246,11 +252,15 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
 
         Utils.dialogConfirm("This workplace will be lost ...",
             function(){
+                $scope.$parent.setLoading(true);
                 workplace.$remove(function(data){
                     Utils.toast("Workplace deleted.");
-                    $scope.workplaces = Workplace.query();
+                    $scope.workplaces = Workplace.query(function(){
+                        $scope.$parent.setLoading(false);
+                    });
                 }, function(err){
                     Utils.toast("Workplace not deleted - internal error.");
+                    $scope.$parent.setLoading(false);
                 });
             },
             function(){
