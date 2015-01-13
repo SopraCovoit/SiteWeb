@@ -1,0 +1,48 @@
+
+<md-text-float label="Search ..." ng-model="searchText"></md-text-float>
+<md-list>
+
+    <div ng-repeat="workplace in workplaces | filter:searchText" ng-init="workplace.tmp.baseLocation = {latitude:workplace.location.latitude, longitude:workplace.location.longitude};">
+
+        <md-card ng-if="!workplace.tmp.expanded" ng-click="workplace.tmp.expanded = !workplace.tmp.expanded">
+            <md-item>
+                <md-item-content>
+                    <div class="md-tile-left">
+                        <img ng-src="bower_components/material-design-icons/maps/svg/production/ic_navigation_24px.svg" class="face" alt="{{ workplace.name }}">
+                    </div>
+                    <div class="md-tile-content">
+                        <h3>{{ workplace.name }}</h3>
+                    </div>
+                </md-item-content>
+            </md-item>
+        </md-card>
+
+        <md-card ng-if="workplace.tmp.expanded">
+            <md-item>
+                <md-item-content>
+                    <div class="md-tile-left">
+                        <img ng-src="bower_components/material-design-icons/maps/svg/production/ic_navigation_24px.svg" class="face" alt="{{ workplace.name }}">
+                    </div>
+                    <div class="md-tile-content">
+                        <h3 ng-click="workplace.tmp.expanded = !workplace.tmp.expanded">{{ workplace.name }}</h3>
+                        <form name="workplaceform" style="padding:20px;">
+                            <md-text-float label="Name" ng-model="workplace.name" required></md-text-float>
+                            <ui-gmap-google-map center="workplace.tmp.baseLocation" zoom="8" draggable="true">
+                                <ui-gmap-marker coords="workplace.location" options="markerOptions" idkey="workplace.id">
+                                </ui-gmap-marker>
+                            </ui-gmap-google-map>
+                            <br/>
+                            <md-button class="md-raised" ng-click="save(workplace)">Save</md-button>
+                            <md-button class="md-warn md-raised" ng-click="delete(workplace)">Delete</md-button>
+                        </form>
+                    </div>
+                </md-item-content>
+            </md-item>
+        </md-card>
+
+    </div>
+</md-list>
+
+<md-button class="md-fab md-primary" id="mainFab" aria-label="main fab" ng-click="add()">
+    <md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+</md-button>

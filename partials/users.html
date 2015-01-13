@@ -1,0 +1,63 @@
+
+<md-text-float label="Search ..." ng-model="searchText"></md-text-float>
+<md-list>
+
+	<div ng-repeat="user in users | filter:searchText">
+
+		<md-card ng-if="!user.tmp.expanded" ng-click="user.tmp.expanded = !user.tmp.expanded">
+			<md-item>
+				<md-item-content>
+					<div class="md-tile-left">
+						<img ng-src="bower_components/material-design-icons/social/svg/design/ic_people_24px.svg" class="face" alt="{{ workplace.name }}">
+					</div>
+					<div class="md-tile-content">
+						<h3>{{ user.name }} {{ user.surname }}</h3>
+						<p>{{ user.mail }}</p>
+					</div>
+				</md-item-content>
+			</md-item>
+		</md-card>
+
+		<md-card ng-if="user.tmp.expanded">
+			<md-item>
+				<md-item-content>
+					<div class="md-tile-left">
+						<img ng-src="bower_components/material-design-icons/social/svg/design/ic_people_24px.svg" class="face" alt="{{ workplace.name }}">
+					</div>
+					<div class="md-tile-content">
+						<h3 ng-click="user.tmp.expanded = !user.tmp.expanded">{{ user.name }} {{user.surname}}</h3>
+						<form name="userform" style="padding:20px;">
+							<div layout="row">
+								<md-text-float label="Name" ng-model="user.name" required></md-text-float>
+								<md-text-float label="Surname" ng-model="user.surname" required></md-text-float>
+							</div>
+							<div layout="row">
+								<md-text-float label="Mail" ng-model="user.mail" required type="email"></md-text-float>
+								<md-text-float label="Phone" ng-model="user.phone" required></md-text-float>
+							</div>
+							<md-checkbox ng-model="user.isDriver" aria-label="Checkbox 1">
+								<span ng-if="user.isDriver">Is driver</span>
+								<span ng-if="!user.isDriver">Is not driver</span>
+							</md-checkbox>
+							<md-radio-group layout="column" ng-model="user.workplace.id">
+								<md-radio-button ng-repeat="w in workplaces" ng-value="w.id" aria-label="w.name">
+									{{ w.name }}
+								</md-radio-button>
+							</md-radio-group>
+							<br/>
+							<md-button class="md-raised" ng-click="save(user)">Save</md-button>
+							<md-button class="md-warn md-raised" ng-click="delete(user)">Delete</md-button>
+						</form>
+					</div>
+				</md-item-content>
+			</md-item>
+		</md-card>
+
+	</div>
+</md-list>
+
+
+<md-button class="md-fab md-primary" id="mainFab" aria-label="main fab" ng-click="add()">
+	<md-icon icon="bower_components/material-design-icons/content/svg/production/ic_add_24px.svg" style="width: 24px; height: 24px;"></md-icon>
+</md-button>
+</div>
