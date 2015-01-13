@@ -40,6 +40,11 @@ sopracovoitControllers.controller('MainController', ["appConfig", "$scope", "$ro
         return $rootScope.isLoading;
     };
 
+        $scope.setLoading = function(what)
+        {
+            $rootScope.isLoading = what;
+        };
+
     $scope.loadPage = function(page)
     {
         $location.path(page);
@@ -118,8 +123,11 @@ sopracovoitControllers.controller("StatsCtrl", ["appConfig", "$scope", "User", "
 sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "Workplace", "Utils", "$mdDialog",
     function(appConfig, $scope, User, Workplace, Utils, $mdDialog){
     $scope.$parent.loadedPage(appConfig.routes.users.name);
+    $scope.$parent.setLoading(true);
 
-    $scope.users = User.query();
+    $scope.users = User.query(function(){
+        $scope.$parent.setLoading(false);
+    });
     $scope.workplaces = Workplace.query();
 
     $scope.add = function()
@@ -194,9 +202,12 @@ sopracovoitControllers.controller("WorkplacesCtrl", ["appConfig", "$scope", "Wor
     function(appConfig, $scope, Workplace, $mdDialog, Utils){
 
     $scope.$parent.loadedPage(appConfig.routes.workplaces.name);
+    $scope.$parent.setLoading(true);
 
     $scope.markerOptions = {draggable: true};
-    $scope.workplaces = Workplace.query();
+    $scope.workplaces = Workplace.query(function(){
+        $scope.$parent.setLoading(false);
+    });
 
     $scope.add = function()
     {
