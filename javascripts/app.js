@@ -47,12 +47,6 @@ sopracovoitApp.constant("appConfig", {
             path: '/workplaces',
             templateUrl: 'partials/workplaces.html',
             controller: "WorkplacesCtrl"
-        },
-        paths: {
-            name: "Paths",
-            path: '/paths',
-            templateUrl: 'partials/paths.html',
-            controller: 'PathsCtrl'
         }
     }
 });
