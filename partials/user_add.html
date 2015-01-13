@@ -9,7 +9,7 @@
                 <span ng-if="user.isDriver">Is driver</span>
                 <span ng-if="!user.isDriver">Is not driver</span>
             </md-checkbox>
-            <md-radio-group ng-model="user.workplace" required>
+            <md-radio-group ng-model="user.workplace.id" required>
                 <md-radio-button ng-repeat="w in workplaces" ng-value="w.id" aria-label="w.name">
                     {{ w.name }}
                 </md-radio-button>

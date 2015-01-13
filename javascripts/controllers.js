@@ -129,6 +129,7 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "
             controller: "UserAddCtrl",
             templateUrl: "partials/user_add.html"
         }).then(function(user){
+            user = new User(user);
             user.$save(function(data){ // success
                 data.tmp = {};
                 data.tmp.expanded = false;
@@ -173,6 +174,8 @@ sopracovoitControllers.controller("UsersCtrl", ["appConfig", "$scope", "User", "
 sopracovoitControllers.controller("UserAddCtrl", ["$scope", "$mdDialog", "Workplace", function($scope, $mdDialog, Workplace){
 
     $scope.workplaces = Workplace.query();
+    $scope.user = {};
+    $scope.user.workplace = {};
 
     $scope.cancel = function()
     {
