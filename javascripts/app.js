@@ -109,9 +109,7 @@ sopracovoitApp.run(function($rootScope, $location, $mdToast, $timeout){
    });
 
    $rootScope.$on('$routeChangeSuccess', function(event, next, current){
-      $timeout(function(){
-        $rootScope.isLoading = false;
-      }, 1000);
+       $rootScope.isLoading = false;
    });
 
 });
