@@ -184,6 +184,7 @@ sopracovoitControllers.controller("UserAddCtrl", ["$scope", "$mdDialog", "Workpl
 
     $scope.save = function()
     {
+        $scope.user.password = new Hashes.SHA1().b64($scope.user.password);
         $mdDialog.hide($scope.user);
     };
 
